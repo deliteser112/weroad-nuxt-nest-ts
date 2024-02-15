@@ -1,0 +1,26 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Moods {
+  culture: Int!
+  history: Int!
+  nature: Int!
+  party: Int!
+  relax: Int!
+}
+
+type Query {
+  travels: [Travel!]!
+}
+
+type Travel {
+  description: String!
+  endingDate: String!
+  id: ID!
+  moods: Moods!
+  name: String!
+  price: Float!
+  slug: String!
+  startingDate: String!
+}
