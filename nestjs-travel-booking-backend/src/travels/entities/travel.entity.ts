@@ -1,29 +1,52 @@
+// src/travels/entities/travel.entity.ts
 import { ObjectType, Field, ID } from '@nestjs/graphql';
-import { Moods } from './moods.type'; // Make sure to import the Moods type
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { Moods } from './moods.type';
+import { Booking } from '../../bookings/entities/booking.entity';
 
 @ObjectType()
+@Entity() // Mark this class as a TypeORM entity
 export class Travel {
     @Field(type => ID)
+    @PrimaryGeneratedColumn('uuid') // Use 'uuid' or omit for numeric IDs
     id: string;
 
     @Field()
+    @Column()
     slug: string;
 
     @Field()
+    @Column()
     name: string;
 
     @Field()
+    @Column('text')
     description: string;
 
     @Field()
-    startingDate: string;
+    @Column()
+    startingDate: string; // Changed to Date type
 
     @Field()
-    endingDate: string;
+    @Column()
+    endingDate: string; // Changed to Date type
 
     @Field()
+    @Column('int')
     price: number;
 
-    @Field(type => Moods) // Use the Moods GraphQL type here
-    moods: Moods;
+    @Field()
+    @Column('int')
+    maxCapacity: number;
+
+    @Field()
+    @Column({ default: 0 })
+    bookedSpots: number;
+
+    @Field(type => Moods)
+    @Column({ type: 'json' })
+    moods: Moods; // Ensure there's a mechanism to persist and load this complex type
+
+    @OneToMany(() => Booking, booking => booking.travel)
+    bookings?: Booking[];
 }

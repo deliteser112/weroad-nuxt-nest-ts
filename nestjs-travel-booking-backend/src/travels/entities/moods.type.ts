@@ -1,3 +1,4 @@
+// src/travels/entities/moods.type.ts
 import { ObjectType, Field, Int } from '@nestjs/graphql';
 
 @ObjectType()

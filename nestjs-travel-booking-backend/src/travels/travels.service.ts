@@ -1,18 +1,25 @@
+// src/travels/travels.service.ts
 import { Injectable } from '@nestjs/common';
-import { Travel } from './interfaces/travel.interface';
-import * as fs from 'fs';
-import * as path from 'path';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Travel } from './entities/travel.entity';
+import { CreateTravelInput } from './dto/create-travel.input';
 
 @Injectable()
 export class TravelsService {
-    private readonly travels: Travel[];
+  private readonly travels: Travel[];
 
-    constructor() {
-        const jsonData = fs.readFileSync(path.join(__dirname, '../../data/travels.json'), 'utf8');
-        this.travels = JSON.parse(jsonData);
-    }
+  constructor(
+    @InjectRepository(Travel)
+    private travelRepository: Repository<Travel>,
+  ) {}
 
-    findAll(): Travel[] {
-        return this.travels;
-    }
+  async createTravel(createTravelInput: CreateTravelInput): Promise<Travel> {
+    const newTravel = this.travelRepository.create(createTravelInput);
+    return this.travelRepository.save(newTravel);
+  }
+
+  async findAll(): Promise<Travel[]> {
+    return this.travelRepository.find();
+  }
 }

@@ -2,6 +2,36 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Booking {
+  createdAt: DateTime!
+  id: ID!
+  spots: Float!
+  travel: Travel!
+  userId: String!
+}
+
+input CreateBookingInput {
+  spots: Int!
+  travelId: String!
+  userId: String!
+}
+
+input CreateTravelInput {
+  description: String!
+  endingDate: String!
+  maxCapacity: Int!
+  moods: MoodsInput!
+  name: String!
+  price: Int!
+  slug: String!
+  startingDate: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 type Moods {
   culture: Int!
   history: Int!
@@ -10,14 +40,31 @@ type Moods {
   relax: Int!
 }
 
+input MoodsInput {
+  culture: Int!
+  history: Int!
+  nature: Int!
+  party: Int!
+  relax: Int!
+}
+
+type Mutation {
+  cancelBooking(bookingId: String!): Boolean!
+  createBooking(createBookingInput: CreateBookingInput!): Booking!
+  createTravel(createTravelInput: CreateTravelInput!): Travel!
+}
+
 type Query {
+  bookingsByUser(userId: String!): [Booking!]!
   travels: [Travel!]!
 }
 
 type Travel {
+  bookedSpots: Float!
   description: String!
   endingDate: String!
   id: ID!
+  maxCapacity: Float!
   moods: Moods!
   name: String!
   price: Float!
