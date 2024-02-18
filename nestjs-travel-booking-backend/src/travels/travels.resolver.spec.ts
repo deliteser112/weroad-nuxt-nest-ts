@@ -1,4 +1,3 @@
-// travels.resolver.spec.ts
 import { Test, TestingModule } from '@nestjs/testing';
 import { TravelsResolver } from './travels.resolver';
 import { TravelsService } from './travels.service';

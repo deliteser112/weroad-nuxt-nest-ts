@@ -18,8 +18,11 @@
   },
   "devDependencies": {
     "@nuxt/typescript-build": "^3.0.2",
+    "@nuxtjs/tailwindcss": "^6.11.4",
+    "@tailwindcss/postcss7-compat": "^2.2.17",
     "autoprefixer": "^10.4.17",
     "postcss": "^8.4.35",
-    "tailwindcss": "^3.4.1"
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.3.3"
   }
 }

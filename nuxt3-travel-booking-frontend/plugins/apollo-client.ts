@@ -17,11 +17,3 @@ export default defineNuxtPlugin(nuxtApp => {
   // Provide Apollo Client to the entire app
   nuxtApp.provide('apollo', apolloClient);
 });
-
-// import { defineNuxtPlugin } from '#app';
-
-// export default defineNuxtPlugin(nuxtApp => {
-//     // Plugin code here
-//     // For example, injecting a function into the Nuxt app
-//     nuxtApp.provide('myFunction', () => 'Hello World');
-// });

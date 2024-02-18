@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 import { useNuxtApp } from '#app';
 import { gql } from '@apollo/client/core';
-import { TravelsData } from '~/types/graphql';
+import type { TravelsData, TravelInput } from '~/types/graphql';
 
 export function useTravels() {
     const { $apollo } = useNuxtApp(); // Accessing the provided Apollo Client instance
@@ -21,6 +21,8 @@ export function useTravels() {
                             startingDate
                             endingDate
                             price
+                            bookedSpots
+                            maxCapacity
                             moods {
                                 nature
                                 relax
@@ -41,5 +43,78 @@ export function useTravels() {
         }
     };
 
-    return { travels, loading, fetchTravels };
+    const bookTravel = async (userId: string, travelId: string, spots: number) => {
+        try {
+            const { data } = await $apollo.mutate({
+                mutation: gql`
+                    mutation createBooking($createBookingInput: CreateBookingInput!) {
+                        createBooking(createBookingInput: $createBookingInput) {
+                            id
+                            userId
+                            travel {
+                                id
+                                name
+                                description
+                                startingDate
+                                endingDate
+                                price
+                                maxCapacity
+                                bookedSpots
+                            }
+                            spots
+                            createdAt
+                        }
+                    }
+                `,
+                variables: {
+                    createBookingInput: {
+                        userId,
+                        travelId,
+                        spots,
+                    },
+                },
+            });
+            console.log('data', data);
+        } catch (error) {
+            console.error("Error booking travel:", error);
+        }
+    };
+
+    const createTravel = async (travelData: TravelInput) => {
+        try {
+            const { data } = await $apollo.mutate({
+                mutation: gql`
+                    mutation createTravel($createTravelInput: CreateTravelInput!) {
+                        createTravel(createTravelInput: $createTravelInput) {
+                            id
+                            name
+                            description
+                            startingDate
+                            endingDate
+                            price
+                            bookedSpots
+                            maxCapacity
+                            moods {
+                                nature
+                                relax
+                                history
+                                culture
+                                party
+                            }
+                        }
+                    }
+                `,
+                variables: {
+                    createTravelInput: travelData,
+                },
+            });
+
+            return data.createTravel;
+        } catch (error) {
+            console.error('Error creating travel:', error);
+            throw error;
+        }
+    };
+
+    return { travels, loading, fetchTravels, bookTravel, createTravel };
 }

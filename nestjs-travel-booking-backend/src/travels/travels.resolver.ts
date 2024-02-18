@@ -4,17 +4,19 @@ import { Travel } from './entities/travel.entity';
 import { TravelsService } from './travels.service';
 import { CreateTravelInput } from './dto/create-travel.input';
 
-@Resolver(of => Travel)
+@Resolver((of) => Travel)
 export class TravelsResolver {
-    constructor(private readonly travelsService: TravelsService) { }
+  constructor(private readonly travelsService: TravelsService) {}
 
-    @Query(returns => [Travel])
-    async travels(): Promise<Travel[]> {
-        return this.travelsService.findAll();
-    }
+  @Query((returns) => [Travel])
+  async travels(): Promise<Travel[]> {
+    return this.travelsService.findAll();
+  }
 
-    @Mutation(() => Travel)
-    async createTravel(@Args('createTravelInput') createTravelInput: CreateTravelInput): Promise<Travel> {
-        return this.travelsService.createTravel(createTravelInput);
-    }
+  @Mutation(() => Travel)
+  async createTravel(
+    @Args('createTravelInput') createTravelInput: CreateTravelInput,
+  ): Promise<Travel> {
+    return this.travelsService.createTravel(createTravelInput);
+  }
 }

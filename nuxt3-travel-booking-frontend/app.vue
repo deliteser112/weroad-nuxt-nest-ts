@@ -1,5 +1,10 @@
 <template>
-  <div>
+  <NuxtLayout>
+    <Header></Header>
     <NuxtPage />
-  </div>
+  </NuxtLayout>
 </template>
+
+<script setup lang="ts">
+import { Header } from '~/components/layouts'
+</script>

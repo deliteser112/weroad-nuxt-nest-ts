@@ -6,7 +6,7 @@ import { CreateBookingInput } from './dto/create-booking.input';
 
 @Resolver(() => Booking)
 export class BookingsResolver {
-  constructor(private readonly bookingsService: BookingsService) {}
+  constructor(private readonly bookingsService: BookingsService) { }
 
   @Mutation(() => Booking)
   async createBooking(
