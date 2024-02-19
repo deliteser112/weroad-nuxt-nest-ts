@@ -1,3 +1,4 @@
+<!-- src/components/common/Header.vue -->
 <template>
   <nav className="navbar flex bg-base-100 mx-auto max-w-7xl mt-4 p-4 shadow-xl rounded-box justify-between">
     <div className="navbar-start">

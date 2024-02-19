@@ -30,17 +30,6 @@ const { travels, loading, fetchTravels } = useTravels();
 const showBookingModal = ref(false);
 const selectedTravel = ref<Travel | null>(null);
 
-// // Use a ref to control when to fetch travels
-// const shouldFetchTravels = ref(true);
-
-// // Watch for changes in shouldFetchTravels and fetch travels accordingly
-// watch(shouldFetchTravels, async (newValue) => {
-//     if (newValue) {
-//         await fetchTravels();
-//         shouldFetchTravels.value = false; // Reset it after fetching
-//     }
-// });
-
 onMounted(() => {
     fetchTravels();
 });

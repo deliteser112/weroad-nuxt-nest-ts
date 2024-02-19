@@ -1,4 +1,5 @@
 
+<!-- src/components/common/NoData.vue -->
 <template>
   <div class="flex flex-col items-center justify-center">
     <h2 class="mt-6 text-lg font-semibold text-gray-700">No Data Found</h2>
