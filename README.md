@@ -68,7 +68,11 @@ The project is structured into backend and frontend folders:
      cd nuxt3-travel-booking-frontend
      npm run dev
      ```
-
+   - **Running Screens:**
+   ![Screenshot](images/home.png)
+   ![Screenshot](images/booking-form.png)
+   ![Screenshot](images/travel-form.png)
+     
 4. **Access the Application**
    Open your browser and visit `http://localhost:3000` to access the WeRoad Travel Booking System.
 
