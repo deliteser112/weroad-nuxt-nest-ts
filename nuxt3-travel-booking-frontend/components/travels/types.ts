@@ -1,3 +1,10 @@
+export interface Moods {
+  nature: number;
+  relax: number;
+  history: number;
+  culture: number;
+  party: number;
+}
 export interface Travel {
   id: string;
   name: string;
@@ -6,12 +13,6 @@ export interface Travel {
   endingDate: string;
   price: number;
   bookedSpots: number;
-  maxCapacity: number; // Add maxCapacity property
-  moods: {
-    nature: number;
-    relax: number;
-    history: number;
-    culture: number;
-    party: number;
-  };
+  maxCapacity: number;
+  moods: Moods;
 }

@@ -13,8 +13,8 @@ export interface Travel {
   slug: string;
   name: string;
   description: string;
-  startingDate: string; // or Date if you convert the string to a Date object
-  endingDate: string; // or Date
+  startingDate: string;
+  endingDate: string;
   price: number;
   maxCapacity: number;
   bookedSpots: number;

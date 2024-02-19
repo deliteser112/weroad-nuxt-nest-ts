@@ -34,5 +34,5 @@ export interface TravelsData {
 }
 
 export interface TravelsVars {
-    limit: number; // Assuming your GraphQL server accepts a limit variable
+    limit: number;
 }

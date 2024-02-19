@@ -4,7 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { BookingsService } from './bookings.service';
 import { BookingsResolver } from './bookings.resolver';
 import { Booking } from './entities/booking.entity';
-import { Travel } from '../travels/entities/travel.entity'; // Adjust the path as necessary
+import { Travel } from '../travels/entities/travel.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Booking, Travel])],

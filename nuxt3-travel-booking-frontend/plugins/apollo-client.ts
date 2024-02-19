@@ -4,7 +4,7 @@ import { ApolloClient, InMemoryCache, HttpLink, from } from '@apollo/client/core
 
 export default defineNuxtPlugin(nuxtApp => {
   const httpLink = new HttpLink({
-    uri: 'http://localhost:4000/graphql', // Adjust this URI to your GraphQL server
+    uri: 'http://localhost:4000/graphql',
   });
 
   const cache = new InMemoryCache();

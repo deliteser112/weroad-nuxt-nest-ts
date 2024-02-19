@@ -26,7 +26,6 @@ export class CreateTravelInput {
   @Field(() => Int)
   maxCapacity: number;
 
-  // Assuming Moods is a simple object or enum. Adjust as necessary.
   @Field(() => MoodsInput)
   moods: MoodsInput;
 }

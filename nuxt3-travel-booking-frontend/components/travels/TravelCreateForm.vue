@@ -1,6 +1,6 @@
 <!-- src/components/travels/TravelCreateForm.vue -->
 <template>
-  <form @submit.prevent="createNewTravel" class="space-y-4">
+  <form @submit.prevent="createNewTravel" class="space-y-4 mb-10">
     <div class="flex flex-col">
       <label for="name" class="text-sm font-medium text-gray-600">Name:</label>
       <input class="border border-gray-300 p-2 mb-4 block w-full rounded-md" v-model="name" type="text" id="name"
@@ -42,13 +42,16 @@
       <input class="border border-gray-300 p-2 mb-4 block w-full rounded-md" v-model.number="maxCapacity" type="number"
         id="maxCapacity" required />
     </div>
-
-    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Create Travel</button>
+    <div class="flex justify-between">
+      <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Create Travel</button>
+      <button @click="handleToHome" class="bg-blue-500 text-white px-4 py-2 rounded">Cancel</button>
+    </div>
   </form>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 import { useTravels } from '~/composables/useTravels';
 
 const name = ref('');
@@ -60,6 +63,7 @@ const price = ref(0);
 const maxCapacity = ref(0);
 
 const { createTravel } = useTravels();
+const router = useRouter();
 
 const createNewTravel = async () => {
   try {
@@ -72,7 +76,7 @@ const createNewTravel = async () => {
       price: price.value,
       maxCapacity: maxCapacity.value,
       moods: {
-        nature: 0, // Add logic to get mood values from your form
+        nature: 0,
         relax: 0,
         history: 0,
         culture: 0,
@@ -81,7 +85,7 @@ const createNewTravel = async () => {
     });
 
     // Handle successful creation, e.g., navigate to the newly created travel page
-    console.log('New Travel Created:', newTravel);
+    router.push('/');
 
     // Optionally reset form fields after successful creation
     name.value = '';
@@ -94,5 +98,9 @@ const createNewTravel = async () => {
     // Handle error
     console.error('Error creating travel:', error);
   }
+};
+
+const handleToHome = () => {
+  router.push('/'); // This navigates back one step in the history stack
 };
 </script>

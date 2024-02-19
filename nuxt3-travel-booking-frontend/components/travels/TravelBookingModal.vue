@@ -25,8 +25,8 @@
 
 <script setup lang="ts">
 import { ref, defineProps, onMounted, onBeforeUnmount, computed, defineEmits } from 'vue';
-import CountdownTimer from './CountdownTimer.vue'; // Correct the path based on your actual structure
-import type { Travel } from '~/components/travels/types'; // Correct the path based on your actual structure
+import CountdownTimer from './CountdownTimer.vue';
+import type { Travel } from '~/components/travels/types';
 import { useTravels } from '~/composables/useTravels';
 
 const props = defineProps<{ selectedTravel: Travel }>();
@@ -35,10 +35,9 @@ const emits = defineEmits();
 const showCountdown = ref(true); // Adjust as needed
 const selectedSpots = ref(1); // Adjust as needed
 
-const { bookTravel } = useTravels();
+const { travels, bookTravel, fetchTravels } = useTravels();
 
 const maxAvailableSpots = computed(() => {
-  // Calculate the maximum available spots based on your requirements
   return props.selectedTravel.maxCapacity - props.selectedTravel.bookedSpots;
 });
 
@@ -53,7 +52,9 @@ const isTravelBookable = (travel: Travel) => {
 
 const confirmBooking = async (travel: Travel) => {
   if (isTravelBookable(travel)) {
+    // travel.bookedSpots += selectedSpots.value;
     await handleBookTravel();
+    location.reload();
     emits('close');
   }
 };
@@ -63,9 +64,9 @@ const closeModal = () => {
 }
 
 const handleBookTravel = async () => {
-  const userId = 'd9b25062-954f-49ba-9274-3b8103d1b3c3' // Assume you logged in with this ID
+  const userId = 'd9b25062-954f-49ba-9274-3b8103d1b3c3' // Assume that the user logged in with this ID
   const travelId = props.selectedTravel.id;
-  const spots = selectedSpots.value; // You can adjust this based on your requirements
+  const spots = selectedSpots.value;
 
   await bookTravel(userId, travelId, spots);
 };

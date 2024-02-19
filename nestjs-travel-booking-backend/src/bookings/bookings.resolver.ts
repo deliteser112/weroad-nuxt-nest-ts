@@ -22,7 +22,7 @@ export class BookingsResolver {
   @Mutation(() => Boolean)
   async cancelBooking(@Args('bookingId') bookingId: string): Promise<boolean> {
     await this.bookingsService.cancelBooking(bookingId);
-    return true; // You might want to handle errors and return false accordingly
+    return true;
   }
 
   @Query(() => [Booking])

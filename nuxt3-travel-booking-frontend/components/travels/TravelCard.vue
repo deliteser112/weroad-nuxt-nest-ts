@@ -18,7 +18,7 @@
                 @click="openBookingModal">Book Now</button>
         </div>
         <div class="px-6 pt-4 pb-2">
-            <span v-for="(value, key) in travel.moods" :key="key"
+            <span v-for="(value, key) in getFilteredMoods(travel.moods)" :key="key"
                 class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
                 #{{ key }}: {{ value }}
             </span>
@@ -28,7 +28,7 @@
   
 <script setup lang="ts">
 import { defineProps } from 'vue';
-import type { Travel } from './types';
+import type { Travel, Moods } from './types';
 
 const props = defineProps<{
     travel: {
@@ -54,6 +54,13 @@ const props = defineProps<{
 const formatDate = (dateString: string) => {
     const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
     return new Date(dateString).toLocaleDateString(undefined, options);
+}
+
+const getFilteredMoods = (moods: Moods) => {
+    // Filter out unwanted keys (e.g., '__typename')
+    return Object.fromEntries(
+        Object.entries(moods).filter(([key]) => key !== '__typename')
+    );
 }
 
 const calculateAvailableSpots = (travel: Travel) => {

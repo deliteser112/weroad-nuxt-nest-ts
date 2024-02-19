@@ -36,6 +36,7 @@ export function useTravels() {
             });
 
             travels.value = data.travels;
+            return data.travels;
         } catch (error) {
             console.error("Error fetching travels:", error);
         } finally {

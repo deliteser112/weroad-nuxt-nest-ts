@@ -12,7 +12,6 @@ export class BookingsService {
     private bookingsRepository: Repository<Booking>,
     @InjectRepository(Travel)
     private travelsRepository: Repository<Travel>,
-    // private connection: Connection, // Injecting the Connection object
     @InjectConnection() private connection: Connection,
   ) { }
 
